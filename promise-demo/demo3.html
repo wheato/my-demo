@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Promise.all</title>
+  <title>Promise 并发请求，顺序处理结果</title>
   <style>
     .pics{
       width: 300px;
@@ -32,11 +32,13 @@
       const urls = ['./images/1.jpg', './images/2.jpg', './images/3.jpg', './images/4.jpg']
       const promises = urls.map(loadImg)
 
+      /*
       let task = Promise.resolve()
       for (let i = 0; i < promises.length; i++) {
         task = task.then(() => promises[i]).then(addToHtml)
       }
-
+      */
+      
       promises.reduce((task, imgPromise) => {
         return task.then(() => imgPromise).then(addToHtml)
       }, Promise.resolve())
